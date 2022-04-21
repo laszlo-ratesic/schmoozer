@@ -14,20 +14,31 @@ const UserSchema = new Schema(
       unique: true,
       match: /.+\@.+\..+/,
     },
-    // thoughts: [thoughts],
-    // friends: [users],
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought"
+      }
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+      }
+    ],
   },
-  // {
-  //   toJSON: {
-  //     virtuals: true,
-  //     getters: true
-  //   },
-  // }
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true
+    },
+    id: false
+  }
 );
 
-// UserSchema.virtual("friendCount").get(function() {
-//     return this.friends.length;
-// })
+UserSchema.virtual("friendCount").get(function() {
+    return this.friends.length;
+})
 
 const User = model("User", UserSchema);
 
