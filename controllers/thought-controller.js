@@ -106,6 +106,25 @@ const thoughtController = {
         res.json(err);
       });
   },
+  // REMOVE a reaction from a thought
+  removeReaction({ params }, res) {
+    Thought.findOneAndUpdate(
+      { _id: params.thoughtId },
+      { $pull: { reactions: { _id: params.reactionId } } },
+      { new: true }
+    )
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found with id!" });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  },
 };
 
 module.exports = thoughtController;
