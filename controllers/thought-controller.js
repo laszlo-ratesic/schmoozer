@@ -16,17 +16,17 @@ const thoughtController = {
   // GET thought by id
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.thoughtId })
-    .then(dbThoughtData => {
+      .then((dbThoughtData) => {
         if (!dbThoughtData) {
-            res.status(404).json({ message: 'No thought found with this id!' })
-            return;
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
         }
         res.json(dbThoughtData);
-    })
-    .catch(err => {
+      })
+      .catch((err) => {
         console.log(err);
         res.json(err);
-    })
+      });
   },
   // CREATE new thought
   createThought({ body }, res) {
@@ -44,6 +44,25 @@ const thoughtController = {
           return;
         }
         res.json(dbUserData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
+  },
+  // UPDATE thought by id
+  updateThoughtById({ params, body }, res) {
+    Thought.findOneAndUpdate(
+      { _id: params.thoughtId },
+      { thoughtText: body.thoughtText },
+      { new: true }
+    )
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
+        }
+        res.json(dbThoughtData);
       })
       .catch((err) => {
         console.log(err);
