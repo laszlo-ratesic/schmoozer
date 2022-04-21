@@ -15,10 +15,8 @@ const userController = {
   // GET one user by id AND populate thought and friend data
   getUserById({ params }, res) {
     User.findOne({ _id: params.userId })
-      .populate({
-        path: "friends",
-        select: "-__v",
-      })
+      .populate('friends')
+      .populate('thoughts')
       .select("-__v")
       .then((dbUserData) => {
         if (!dbUserData) {
