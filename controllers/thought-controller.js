@@ -1,5 +1,5 @@
 const res = require("express/lib/response");
-const { Thought, User } = require("../models");
+const { Thought, User, Reaction } = require("../models");
 
 const thoughtController = {
   // GET all thoughts
@@ -16,6 +16,7 @@ const thoughtController = {
   // GET thought by id
   getThoughtById({ params }, res) {
     Thought.findOne({ _id: params.thoughtId })
+      .select("-__v")
       .then((dbThoughtData) => {
         if (!dbThoughtData) {
           res.status(404).json({ message: "No thought found with this id!" });
@@ -72,17 +73,38 @@ const thoughtController = {
   // DELETE thought by id
   deleteThoughtById({ params }, res) {
     Thought.findOneAndDelete({ _id: params.thoughtId })
-    .then((dbThoughtData) => {
-        if(!dbThoughtData) {
-            res.status(404).json({ message: 'No thought found with this id!' });
-            return;
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
         }
         res.json(dbThoughtData);
-    })
-    .catch(err => {
+      })
+      .catch((err) => {
         console.log(err);
         res.json(err);
-    })
+      });
+  },
+  // ADD a reaction to a thought
+  addReaction({ params, body }, res) {
+    Thought.findOneAndUpdate(
+      { _id: params.thoughtId },
+      { $push: { reactions: body } },
+      { new: true }
+    )
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res
+            .status(404)
+            .json({ message: "There was no thought found with this id!" });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.json(err);
+      });
   },
 };
 
