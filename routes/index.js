@@ -1,9 +1,11 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
-// const adminRoutes = require('./admin-routes');
+const authRoutes = require('./auth');
+const adminRoutes = require('./admin');
 
-// router.use('/', adminRoutes);
 router.use('/api', apiRoutes);
+router.use('/auth', authRoutes);
+router.use('/admin', adminRoutes);
 
 router.use((req, res) => {
     res.status(404).end();
