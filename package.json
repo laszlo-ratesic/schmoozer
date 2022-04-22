@@ -20,6 +20,7 @@
   "homepage": "https://github.com/laszlo-ratesic/schmoozer#readme",
   "dependencies": {
     "express": "^4.17.3",
+    "express-handlebars": "^6.0.5",
     "gradient-string": "^2.0.1",
     "mongoose": "^6.3.0"
   }

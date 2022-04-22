@@ -2,10 +2,15 @@ const express = require("express");
 const mongoose = require("mongoose");
 const gradient = require("gradient-string");
 const path = require('path');
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create();
 const routes = require('./routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
