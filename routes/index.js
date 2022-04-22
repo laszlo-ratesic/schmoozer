@@ -3,7 +3,9 @@ const apiRoutes = require('./api');
 const authRoutes = require('./auth');
 const adminRoutes = require('./admin');
 
-router.use('/', adminRoutes);
+router.get('/', (req, res) => {
+    res.redirect('/auth/login');
+})
 router.use('/api', apiRoutes);
 router.use('/auth', authRoutes);
 router.use('/admin', adminRoutes);
