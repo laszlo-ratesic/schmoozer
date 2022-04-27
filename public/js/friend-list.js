@@ -1,7 +1,7 @@
 const $friendList = document.querySelector("#friend-list");
 
 const getFriendList = () => {
-  fetch("/api/users/:userId")
+  fetch("/api/users")
     .then((response) => response.json())
     .then((friendListArr) => {
       friendListArr.forEach(printFriend);
@@ -25,10 +25,10 @@ const printFriend = ({ _id, username, email, friends }) => {
       </div>
       <div class="d-flex flex-column justify-content-center">
         <h6 class="mb-0 text-sm">
-          John Michael
+          ${username}
         </h6>
         <p class="text-xs text-secondary mb-0">
-          john@creative-tim.com
+          ${email}
         </p>
       </div>
     </div>
@@ -65,3 +65,5 @@ const printFriend = ({ _id, username, email, friends }) => {
     `;
   $friendList.innerHTML += friendRow;
 };
+
+getFriendList();

@@ -139,12 +139,9 @@
                     </tr>
                   </thead>
                   <tbody id="friend-list">
-                    {{> friend-info}}
-                    {{> friend-info}}
-                    {{> friend-info}}
-                    {{> friend-info}}
-                    {{> friend-info}}
-                    {{> friend-info}}
+                    {{#each friends as |friend|}}
+                      {{> friend-info friend}}
+                    {{/each}}
                   </tbody>
                 </table>
               </div>
@@ -229,6 +226,7 @@
       </div>
     </div>
   </div>
+  <script src="/js/friend-list.js"></script>
   <!--   Core JS Files   -->
   <script src="/js/core/popper.min.js"></script>
   <script src="/js/core/bootstrap.min.js"></script>
