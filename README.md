@@ -34,7 +34,7 @@ Replacing the above placeholder with the link copied from GitHub. This will clon
 
 Link to walkthrough video included below.
 
-![Walkthrough Video for Schmoozer.](./public/img/mockup.gif)
+[Walkthrough Video for Schmoozer - https://drive.google.com/file/d/1EI0ptdC1_V5gZfFV9mlOIe78wfKOQ5c6/view](https://drive.google.com/file/d/1EI0ptdC1_V5gZfFV9mlOIe78wfKOQ5c6/view)
 
 ## 🥂 Credits
 
